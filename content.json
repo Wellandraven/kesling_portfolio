@@ -1,15 +1,34 @@
 {
   "site": {
-    "name": "Your Name",
-    "title": "Your Name — Portfolio",
-    "description": "One sentence describing you and your work, used by search engines and link previews."
+    "name": "willkesling.netlify.app",
+    "title": "Will Kesling's Portfolio",
+    "description": "Product & Design Leader | Human-AI systems: helping teams adopt and build with AI | Head of Design, US Servicing at TD | Founder, Well and Raven | USMC veteran"
   },
   "signs": {
-    "raven": { "title": "The Raven", "hover": "About Well & Raven", "text": "Write about what this sign means to you here." },
-    "heart": { "title": "The Heart", "text": "Write about what this sign means to you here." },
-    "d20": { "title": "The D20", "text": "Write about what this sign means to you here." },
-    "tools": { "title": "Wrench & Pencil", "text": "Write about what this sign means to you here." },
-    "mmark": { "title": "The M Mark", "text": "Write about what this sign means to you here." },
-    "qblock": { "title": "The Question Block", "text": "Write about what this sign means to you here." }
+    "raven": {
+      "title": "The Raven",
+      "hover": "About Well and Raven",
+      "text": "Write about what this sign means to you here."
+    },
+    "heart": {
+      "title": "The Heart",
+      "text": "Write about what this sign means to you here."
+    },
+    "d20": {
+      "title": "The D20",
+      "text": "Write about what this sign means to you here."
+    },
+    "tools": {
+      "title": "Wrench & Pencil",
+      "text": "Write about what this sign means to you here."
+    },
+    "mmark": {
+      "title": "The M Mark",
+      "text": "Write about what this sign means to you here."
+    },
+    "qblock": {
+      "title": "The Question Block",
+      "text": "Write about what this sign means to you here."
+    }
   }
 }
