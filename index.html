@@ -94,6 +94,36 @@
       <button type="button" class="pill" data-action="reset">Reset</button>
       <span class="saved" data-saved hidden>Saved</span>
     </div>
+    <!-- Admin: GitHub sign-in for the content editor (behavior in js/admin.js) -->
+    <div class="panel-admin">
+      <span class="muted">Admin</span>
+      <div class="panel-actions" data-admin="signed-out">
+        <button type="button" class="pill" data-action="cms-signin">Sign in with GitHub</button>
+      </div>
+      <div class="admin-signed-in" data-admin="signed-in" hidden>
+        <span class="admin-user">Signed in as <span data-admin-user></span></span>
+        <div class="panel-actions">
+          <button type="button" class="pill pill--primary" data-action="cms-edit">Edit content</button>
+          <button type="button" class="pill" data-action="cms-signout">Sign out</button>
+        </div>
+      </div>
+      <span class="admin-status" data-admin-status role="status" hidden></span>
+    </div>
+  </div>
+
+  <!-- Content editor: commits content.json to GitHub (js/admin.js) -->
+  <div class="panel editor" id="cms-editor" role="dialog" aria-labelledby="cms-editor-title" hidden>
+    <div class="panel-row">
+      <span class="panel-title" id="cms-editor-title">Content</span>
+      <button type="button" class="close-btn" data-action="cms-close" aria-label="Close editor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
+      </button>
+    </div>
+    <form class="cms-fields" data-cms-fields></form>
+    <div class="panel-actions">
+      <button type="button" class="pill pill--primary" data-action="cms-save">Save</button>
+      <span class="cms-status" data-cms-status role="status"></span>
+    </div>
   </div>
 
   <!-- Sound credit toast -->

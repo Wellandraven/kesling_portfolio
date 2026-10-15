@@ -2,6 +2,10 @@
 [build]
   publish = "."
 
+# CMS login (GitHub OAuth). Plain ES modules, no dependencies, so still nothing to install or build.
+[functions]
+  directory = "netlify/functions"
+
 [[headers]]
   for = "/assets/*"
   [headers.values]
