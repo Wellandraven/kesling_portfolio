@@ -19,8 +19,20 @@
       "text": "Write about what this sign means to you here."
     },
     "tools": {
-      "title": "Wrench & Pencil",
-      "text": "Write about what this sign means to you here."
+      "title": "Case Studies",
+      "hover": "Case Studies",
+      "text": "Write about what this sign means to you here.",
+      "projects": [
+        {
+          "title": "Open5e Coverage Explorer",
+          "thumb": "assets/open5e-coverage-explorer.png",
+          "blurb": "How AI, source verification, and visual design turned dense D&D reference material into a decision aid for VTT builders.",
+          "links": [
+            { "label": "Read case study", "url": "https://open5e-coverage-explorer.netlify.app/case-study.html" },
+            { "label": "Open dashboard", "url": "https://open5e-coverage-explorer.netlify.app/" }
+          ]
+        }
+      ]
     },
     "mmark": {
       "title": "The M Mark",

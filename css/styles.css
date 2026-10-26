@@ -152,3 +152,16 @@ button { font: inherit; }
 .drawer-grip { width: 36px; height: 5px; border-radius: 3px; background: #3a3348; margin: 2px auto 0; flex: none; }
 .drawer-title { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sign); }
 .drawer-text { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.6; }
+.drawer-projects { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.drawer-project { display: flex; flex-direction: column; gap: 8px; padding: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.drawer-project-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top left; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 4px; }
+.drawer-project h3 { margin: 0; font-size: 16px; font-weight: 700; color: var(--ink); }
+.drawer-project p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.55; }
+.drawer-project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.drawer-project-links a {
+  display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px;
+  border: 1px solid var(--line-2); border-radius: 999px; color: var(--sign); text-decoration: none;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.drawer-project-links a:hover { color: var(--magenta); border-color: var(--magenta); }
+.drawer-project-links a:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }

@@ -6,7 +6,7 @@ export function mountHeroUI(scene) {
   const settings = q('#scene-settings'), info = q('#scene-info');
   const drawer = q('#sign-drawer'), backdrop = q('#sign-drawer-backdrop');
   const hoverSwitch = q('[data-action="hover"]'), saved = q('[data-saved]');
-  let infoTimer, savedTimer;
+  let infoTimer, savedTimer, shownSign;
 
   const value = {
     brightness: () => scene.state.brightness, bloom: () => scene._bloom(), fog: () => scene._fog(),
@@ -52,6 +52,45 @@ export function mountHeroUI(scene) {
       q('#sign-drawer-title').textContent = sign.title;
       q('#sign-drawer-text').textContent = sign.text;
     }
+    // sync runs on every state change, so only rebuild the project list when the open sign changes
+    if (s.activeSign !== shownSign) {
+      shownSign = s.activeSign;
+      renderProjects((sign && sign.projects) || []);
+    }
+  }
+
+  // case-study cards from content.json → signs.<key>.projects
+  function renderProjects(projects) {
+    const list = q('#sign-drawer-projects');
+    list.hidden = !projects.length;
+    list.replaceChildren(...projects.map((p) => {
+      const li = document.createElement('li');
+      li.className = 'drawer-project';
+      if (p.thumb) {
+        const img = document.createElement('img');
+        img.className = 'drawer-project-thumb';
+        img.src = p.thumb;
+        img.alt = ''; // the title below names the project
+        img.loading = 'lazy';
+        li.append(img);
+      }
+      const title = document.createElement('h3');
+      title.textContent = p.title;
+      const blurb = document.createElement('p');
+      blurb.textContent = p.blurb || '';
+      const links = document.createElement('div');
+      links.className = 'drawer-project-links';
+      for (const l of p.links || []) {
+        const a = document.createElement('a');
+        a.href = l.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = l.label;
+        links.append(a);
+      }
+      li.append(title, blurb, links);
+      return li;
+    }));
   }
 
   const on = (sel, fn, ev = 'click') => qa(sel).forEach((el) => el.addEventListener(ev, fn));
