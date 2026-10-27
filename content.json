@@ -21,7 +21,7 @@
     "tools": {
       "title": "Case Studies",
       "hover": "Case Studies",
-      "text": "Write about what this sign means to you here.",
+      "text": "",
       "projects": [
         {
           "title": "Open5e Coverage Explorer",

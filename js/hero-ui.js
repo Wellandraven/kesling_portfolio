@@ -50,7 +50,9 @@ export function mountHeroUI(scene) {
     if (sign) {
       drawer.style.setProperty('--sign', sign.color);
       q('#sign-drawer-title').textContent = sign.title;
-      q('#sign-drawer-text').textContent = sign.text;
+      const text = q('#sign-drawer-text');
+      text.textContent = sign.text;
+      text.hidden = !sign.text;
     }
     // sync runs on every state change, so only rebuild the project list when the open sign changes
     if (s.activeSign !== shownSign) {
