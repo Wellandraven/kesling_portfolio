@@ -53,7 +53,7 @@ export function mountHeroUI(scene) {
       drawer.style.setProperty('--sign', sign.color);
       q('#sign-drawer-title').textContent = sign.title;
       const text = q('#sign-drawer-text');
-      text.textContent = sign.text;
+      renderText(text, sign.text || '');
       text.hidden = !sign.text;
       const badge = q('#sign-drawer-badge');
       if (sign.badge) badge.src = sign.badge;
@@ -69,6 +69,21 @@ export function mountHeroUI(scene) {
       // closed after opening from a label: hand focus back to that label
       if (!sign && opener) { opener.focus(); opener = null; }
     }
+  }
+
+  // drawer text with [label](https://…) links; built as nodes so content.json can't inject markup
+  function renderText(el, str) {
+    const parts = str.split(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/);
+    el.replaceChildren(...parts.map((part, i) => {
+      if (i % 3 === 0) return part;
+      if (i % 3 === 2) return '';
+      const a = document.createElement('a');
+      a.href = parts[i + 1];
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = part;
+      return a;
+    }));
   }
 
   // case-study cards from content.json → signs.<key>.projects
