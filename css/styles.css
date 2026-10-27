@@ -112,10 +112,10 @@ button { font: inherit; }
 .saved { color: var(--cyan); font-size: 11px; }
 
 /* ---------- Sign drawer ---------- */
-.drawer-backdrop { position: fixed; inset: 0; z-index: 6; background: rgba(3,2,6,0.4); animation: fadeIn 0.2s ease; }
+.drawer-backdrop { position: fixed; inset: var(--nav-h, 0px) 0 0; z-index: 6; background: rgba(3,2,6,0.4); animation: fadeIn 0.2s ease; }
 .drawer {
   --sign: var(--raven);
-  position: fixed; inset: 0; z-index: 7; width: 100%;
+  position: fixed; inset: var(--nav-h, 0px) 0 0; z-index: 7; width: 100%;
   display: flex; flex-direction: column; gap: 14px; padding: 10px 24px 28px; overflow-y: auto;
   background: rgba(17,13,24,0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border: 0; border-top: 3px solid var(--sign);
@@ -123,13 +123,6 @@ button { font: inherit; }
   animation: drawerIn 0.32s cubic-bezier(0.16,1,0.3,1);
 }
 .drawer-grip { width: 36px; height: 5px; border-radius: 3px; background: #3a3348; margin: 2px auto 0; flex: none; }
-.drawer-heading { display: flex; align-items: center; gap: 12px; min-width: 0; }
-/* unlit tube: the sign's outline (assets/unlit/<sign>.svg, set as --icon by js/hero-ui.js) in a dim, desaturated tint of its color */
-.drawer-icon {
-  width: 60px; height: 60px; flex: none;
-  background: color-mix(in srgb, var(--sign) 32%, #3a3348);
-  -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat;
-}
 .drawer-title { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sign); }
 .drawer-text { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.6; }
 .drawer-projects { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }

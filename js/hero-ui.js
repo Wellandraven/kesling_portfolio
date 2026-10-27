@@ -48,9 +48,9 @@ export function mountHeroUI(scene) {
     const sign = s.activeSign && scene.signInfo[s.activeSign];
     drawer.hidden = backdrop.hidden = !sign;
     if (sign) {
+      // the sheet stops at the bottom of the top nav so the toolbar stays visible
+      document.documentElement.style.setProperty('--nav-h', `${Math.max(0, q('.toolbar').getBoundingClientRect().bottom)}px`);
       drawer.style.setProperty('--sign', sign.color);
-      // absolute URL: a relative url() in a custom property resolves against the stylesheet that uses it (css/)
-      drawer.style.setProperty('--icon', `url(${new URL(`assets/unlit/${s.activeSign}.svg`, document.baseURI)})`);
       q('#sign-drawer-title').textContent = sign.title;
       const text = q('#sign-drawer-text');
       text.textContent = sign.text;
