@@ -131,7 +131,7 @@ button { font: inherit; }
   --sign: var(--raven);
   position: fixed; inset: var(--nav-h, 0px) 0 0; z-index: 7; width: 100%;
   display: flex; flex-direction: column; gap: 14px; padding: 10px 24px 28px; overflow-y: auto;
-  background: rgba(17,13,24,0.2); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  background: rgba(17,13,24,0.1); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border: 0; border-top: 3px solid var(--sign);
   box-shadow: 0 1px 6px var(--sign), 0 2px 18px var(--sign);
   animation: drawerIn 0.32s cubic-bezier(0.16,1,0.3,1);
