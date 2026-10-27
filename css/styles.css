@@ -140,13 +140,19 @@ button { font: inherit; }
 .drawer-title { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sign); }
 .drawer-intro { display: flex; align-items: center; gap: 20px; }
 .drawer-badge { width: 96px; height: auto; flex: none; }
-.drawer-text { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.6; }
-.drawer-subhead { margin: 6px 0 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+/* narrow screens: stack the badge over the text so the paragraph keeps a readable line length */
+@media (max-width: 720px) {
+  .drawer-intro { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .drawer-badge { width: 72px; }
+}
+/* type follows USWDS: 16px+ body, ~66-character measure, 1.5+ line-height for paragraphs, 1–1.35 for headings */
+.drawer-text { margin: 0; max-width: 55ch; /* ch is a "0"; 55ch ≈ 66 average characters */ color: var(--ink); font-size: 16px; line-height: 1.6; }
+.drawer-subhead { margin: 10px 0 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .drawer-projects { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
 .drawer-project { display: flex; flex-direction: column; gap: 8px; padding: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
 .drawer-project-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top left; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 4px; }
-.drawer-project h3 { margin: 0; font-size: 16px; font-weight: 700; color: var(--ink); }
-.drawer-project p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.55; }
+.drawer-project h3 { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--ink); }
+.drawer-project p { margin: 0; color: var(--ink-2); font-size: 16px; line-height: 1.5; }
 .drawer-project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .drawer-project-links a {
   display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px;
