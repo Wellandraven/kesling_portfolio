@@ -7,7 +7,7 @@ export class HeroScene extends SceneBase {
   state = { size: 0.75, brightness: 0.87, soundOn: false, settingsOpen: false, bloom: null, fog: null, flicker: null, drift: 3, hover: null, savedFlash: false, activeSign: null };
   signInfo = {
     raven: { title: 'Well and Raven', color: '#5fb8e6', text: 'Write about what this sign means to you here.' },
-    heart: { title: 'The Heart', color: '#ff3355', text: 'Write about what this sign means to you here.' },
+    heart: { title: 'About Will', color: '#ff3355', text: 'Write about what this sign means to you here.' },
     d20: { title: 'The D20', color: '#b98cff', text: 'Write about what this sign means to you here.' },
     tools: { title: 'Wrench & Pencil', color: '#6dffb0', text: 'Write about what this sign means to you here.' },
     mmark: { title: 'The M Mark', color: '#f5375d', text: 'Write about what this sign means to you here.' },
