@@ -4,7 +4,7 @@ import { SceneBase } from './scene-base.js';
 
 export class HeroScene extends SceneBase {
   containerRef = { current: null };
-  state = { size: 0.75, brightness: 1, soundOn: false, settingsOpen: false, bloom: null, fog: null, flicker: null, drift: 1, hover: null, savedFlash: false, activeSign: null };
+  state = { size: 0.75, brightness: 0.87, soundOn: false, settingsOpen: false, bloom: null, fog: null, flicker: null, drift: 3, hover: null, savedFlash: false, activeSign: null };
   signInfo = {
     raven: { title: 'The Raven', color: '#5fb8e6', text: 'Write about what this sign means to you here.' },
     heart: { title: 'The Heart', color: '#ff3355', text: 'Write about what this sign means to you here.' },

@@ -110,7 +110,7 @@ export function mountHeroUI(scene) {
   qa('[data-size]').forEach((b) => b.addEventListener('click', () => scene.setState({ size: parseFloat(b.dataset.size) })));
   qa('input[data-key]').forEach((i) => i.addEventListener('input', () => scene.setState({ [i.dataset.key]: parseFloat(i.value) })));
   on('[data-action="hover"]', () => scene.setState({ hover: !scene._hover() }));
-  on('[data-action="reset"]', () => scene.setState({ bloom: null, fog: null, flicker: null, drift: 1, hover: null, size: 0.75, brightness: 1 }));
+  on('[data-action="reset"]', () => scene.setState({ bloom: null, fog: null, flicker: null, drift: 3, hover: null, size: 0.75, brightness: 0.87 }));
   on('[data-action="save"]', () => {
     const { size, brightness, bloom, fog, flicker, drift, hover } = scene.state;
     localStorage.setItem('neonHeroScene.settings', JSON.stringify({ size, brightness, bloom, fog, flicker, drift, hover }));
