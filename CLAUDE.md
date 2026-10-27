@@ -3,12 +3,11 @@
 Static portfolio site deployed to Netlify from git. **No build step, no npm, no framework.** Keep it that way unless asked.
 
 ## Where things live
-- Copy: `content.json` only (page title/description and sign drawer text). When asked to change text, edit this file and nothing else.
+- Copy: `content.json` only (page title/description, sign drawer text, and `projects` case-study cards). When asked to change text, edit this file and nothing else.
 - The page is just the hero; there are no portfolio sections below it.
 - Styling: `css/styles.css`. Colors are CSS variables in `:root`. Sign colors must match the hex values in `js/hero-scene.js` (`defs` and `signInfo`).
 - Hero scene: `js/hero-scene.js` is a three.js scene ported verbatim from the original design. Treat it as tuned. Change only what's asked and keep its `this.state` / `this.props` / `this.setState` usage (provided by `js/scene-base.js`).
 - Sign layout: each sign has a `.sign-cell` in the flex-wrap `.sign-grid` (`index.html` / `css/styles.css`). The scene measures the cells and draws each sign at its cell's center, so layout changes belong in CSS, not in the scene.
-- CMS: `js/admin.js` (sign-in block at the bottom of the settings panel, `#cms-editor` panel) commits `content.json` via the GitHub API. Login is GitHub OAuth through `netlify/functions/auth.mjs` + `callback.mjs`, which have no dependencies, so still no npm/build. New content fields need adding to `SITE_FIELDS` / `SIGN_FIELDS` in `js/admin.js`.
 - Scene settings UI: markup in `index.html`, behavior in `js/hero-ui.js`.
 
 ## Conventions

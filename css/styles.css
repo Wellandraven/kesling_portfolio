@@ -110,33 +110,6 @@ button { font: inherit; }
 .pill:hover { border-color: var(--raven); color: var(--ink); }
 .pill--save:hover { border-color: var(--magenta); }
 .saved { color: var(--cyan); font-size: 11px; }
-.pill--primary { background: var(--magenta); border-color: var(--magenta); color: var(--on-magenta); }
-.pill--primary:hover { background: #ff62e0; border-color: #ff62e0; color: var(--on-magenta); }
-.pill:disabled { opacity: 0.5; cursor: default; }
-
-/* ---------- Admin (bottom of settings) ---------- */
-.panel-admin { display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
-.admin-signed-in { display: flex; flex-direction: column; gap: 10px; }
-.admin-user { color: var(--ink-2); text-transform: none; letter-spacing: 0; font-size: 13px; overflow-wrap: anywhere; }
-.admin-user [data-admin-user] { color: var(--ink); }
-.admin-status { color: var(--ink-3); text-transform: none; letter-spacing: 0; font-size: 12px; }
-
-/* ---------- Content editor ---------- */
-.editor {
-  z-index: 6; width: min(520px, calc(100vw - 28px)); max-height: calc(100vh - 28px);
-  display: flex; flex-direction: column; gap: 14px; padding: 16px 18px 18px; border-radius: 12px;
-  font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
-}
-.cms-fields { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; margin: 0 -4px; padding: 0 4px; }
-.cms-group { --sign: var(--ink-2); margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.cms-group legend { padding: 0 0 4px; color: var(--sign); font-size: 11px; letter-spacing: 0.08em; }
-.cms-field { display: flex; flex-direction: column; gap: 6px; color: var(--ink-3); }
-.cms-field input, .cms-field textarea {
-  width: 100%; padding: 8px 10px; background: var(--panel); border: 1px solid var(--line-2); border-radius: 8px;
-  color: var(--ink); font: 14px/1.5 var(--font); letter-spacing: 0; text-transform: none; resize: vertical;
-}
-.cms-field input:focus, .cms-field textarea:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 1px var(--cyan); }
-.cms-status { color: var(--ink-3); text-transform: none; letter-spacing: 0; font-size: 12px; }
 
 /* ---------- Sign drawer ---------- */
 .drawer-backdrop { position: fixed; inset: 0; z-index: 6; background: rgba(3,2,6,0.4); animation: fadeIn 0.2s ease; }
