@@ -55,6 +55,9 @@ export function mountHeroUI(scene) {
       const text = q('#sign-drawer-text');
       text.textContent = sign.text;
       text.hidden = !sign.text;
+      const subhead = q('#sign-drawer-subhead');
+      subhead.textContent = sign.projectsHeading || '';
+      subhead.hidden = !sign.projectsHeading;
     }
     // sync runs on every state change, so only rebuild the project list when the open sign changes
     if (s.activeSign !== shownSign) {

@@ -8,7 +8,24 @@
     "raven": {
       "title": "Well and Raven",
       "hover": "About Well and Raven",
-      "text": "Write about what this sign means to you here."
+      "text": "Well and Raven, LLC is where I am pushing the boundaries of my imagination and what can be done with AI. This involves drawing from a deep well of enterprise context and mixing it with the frontier-lead AI & Business lessons from MasterClass Executive.",
+      "projectsHeading": "Current Product Releases",
+      "projects": [
+        {
+          "title": "Skald Tool",
+          "blurb": "An editor for newsletters and blogs. Keep your notes and research beside the page, try a second version without losing the first, and keep the best lines of each. One-click copy and paste all content and images easily into the publishing platform of your choice. No more excessive tab hopping, no more losing the ideas or context of earlier drafts.",
+          "links": [
+            { "label": "Open Skald Tool", "url": "https://skaldtool.netlify.app/" }
+          ]
+        },
+        {
+          "title": "Alviss Quest",
+          "blurb": "Alviss Quest is designed for one-shots and micro modules for D&D. Easy to use features (generate maps in seconds, built in terrain rules, weather system, dynamic lighting, fog of war) allows for DM's to spin up, host and run sessions in a fraction of the time. We're in early beta now, actively recruiting and interviewing players and DMs to help shape what we build next.",
+          "links": [
+            { "label": "Visit Alviss Quest", "url": "https://www.alvissquest.com/about" }
+          ]
+        }
+      ]
     },
     "heart": {
       "title": "About Will",
