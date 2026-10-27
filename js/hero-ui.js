@@ -125,12 +125,19 @@ export function mountHeroUI(scene) {
     savedTimer = setTimeout(() => scene.setState({ savedFlash: false }), 1600);
   });
   on('[data-action="close-drawer"]', () => scene.setState({ activeSign: null }));
-  // sign labels: text and color from the sign, and a keyboard/screen-reader way into each drawer
+  // nav labels: text and color from the sign, and a keyboard/screen-reader way into each drawer
   qa('[data-open-sign]').forEach((b) => {
     const info = scene.signInfo[b.dataset.openSign];
     if (!info) return;
     b.textContent = info.title;
     b.style.setProperty('--sign', info.color);
+    // hovering or focusing a label plays its sign's hover animation (read each frame by the scene)
+    const hoverOn = () => { scene._labelHover = b.dataset.openSign; };
+    const hoverOff = () => { if (scene._labelHover === b.dataset.openSign) scene._labelHover = null; };
+    b.addEventListener('pointerenter', hoverOn);
+    b.addEventListener('pointerleave', hoverOff);
+    b.addEventListener('focus', hoverOn);
+    b.addEventListener('blur', hoverOff);
     b.addEventListener('click', () => {
       opener = b;
       scene.setState({ activeSign: b.dataset.openSign });

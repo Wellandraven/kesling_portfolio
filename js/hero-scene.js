@@ -863,23 +863,25 @@ export class HeroScene extends SceneBase {
       const t = clock.getElapsedTime();
       flickerAmount = this._flicker(); mouseReact = this._hover();
       driftT += dt * this.state.drift; // drift clock runs at the chosen speed (0 freezes the signs in place)
+      // a hovered/focused nav label (set by hero-ui.js) plays its sign's hover animation
+      const navHover = mouseReact ? this._labelHover : null;
 
       // die: hover-enter or tap rolls it; it homes onto the 20 and rests
       const die = dieSign.group.userData.die;
-      const overDie = mouseReact && inDie(this._mouseWorld);
+      const overDie = (mouseReact && inDie(this._mouseWorld)) || navHover === 'd20';
       if (overDie && !die.hovering) die.roll(t);
       die.hovering = overDie;
       die.update(t, dt);
 
       // question block: hover-enter or tap bumps it
       const block = blockSign.group.userData.block;
-      const overBlock = mouseReact && inBlock(this._mouseWorld);
+      const overBlock = (mouseReact && inBlock(this._mouseWorld)) || navHover === 'qblock';
       if (overBlock && !block.hovering) block.hit(t);
       block.hovering = overBlock;
       block.update(t);
 
       // wrench & pencil: arcs + sparks while hovered or briefly after a tap
-      const zapNow = (mouseReact && inTools(this._mouseWorld)) || performance.now() < zapUntil;
+      const zapNow = (mouseReact && inTools(this._mouseWorld)) || navHover === 'tools' || performance.now() < zapUntil;
       if (zapNow && !wasZap) { burst(30, 1.8); playZap(); }
       if (!zapNow && wasZap) { zapSfx.pause(); }
       wasZap = zapNow;
@@ -892,7 +894,7 @@ export class HeroScene extends SceneBase {
       updateSparks(dt);
 
       // M monogram: digital rain while hovered or briefly after a tap
-      const rainNow = (mouseReact && inM(this._mouseWorld)) || performance.now() < rainUntil;
+      const rainNow = (mouseReact && inM(this._mouseWorld)) || navHover === 'mmark' || performance.now() < rainUntil;
       if (rainNow && !wasRain) playMRain();
       if (!rainNow && wasRain) mRainSfx.pause();
       wasRain = rainNow;
@@ -908,7 +910,7 @@ export class HeroScene extends SceneBase {
       }
 
       // beak: ease toward open while hovered or briefly after a tap; each mandible rotates about the beak hinge
-      const wantOpen = (mouseReact && inRaven(this._mouseWorld)) || performance.now() < tapOpenUntil ? 1 : 0;
+      const wantOpen = (mouseReact && inRaven(this._mouseWorld)) || navHover === 'raven' || performance.now() < tapOpenUntil ? 1 : 0;
       if (wantOpen && !wasOpen) playKaw();
       wasOpen = !!wantOpen;
       const nextOpen = beakOpen + (wantOpen - beakOpen) * 0.16;
@@ -941,7 +943,7 @@ export class HeroScene extends SceneBase {
         const dp = driftT * s.driftSpeed + s.driftPhase;
         const isHit = s.hit(this._mouseWorld);
         if (isHit) { anyHit = true; if (!hitShape) hitShape = s.shape; }
-        const wantFwd = (mouseReact && isHit) || performance.now() < s.forwardUntil ? 1 : 0;
+        const wantFwd = (mouseReact && isHit) || navHover === s.shape || performance.now() < s.forwardUntil ? 1 : 0;
         s.forward += (wantFwd - s.forward) * (wantFwd ? 0.1 : 0.04);
         const depth = Math.max(0, Math.min(1, s.restDepth + 0.1 * Math.sin(dp))) * (1 - s.forward);
         s.group.scale.setScalar(s.baseScale * (1 - 0.5 * depth));

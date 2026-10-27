@@ -8,7 +8,7 @@ ES modules and `fetch('content.json')` don't work from `file://`, so serve the f
 - or a terminal in this folder: `npx serve .`
 
 ## Edit content
-All text lives in **`content.json`**: the page title and description (`site`) and the sign drawer text (`signs`). A sign's `title` is also the label under it on the page. Add an optional `"hover"` to a sign to show it as a tooltip when that sign is hovered, and an optional `"projects"` list (title, thumb, blurb, links) to show case-study cards in its drawer. Push to `main` and Netlify redeploys.
+All text lives in **`content.json`**: the page title and description (`site`) and the sign drawer text (`signs`). A sign's `title` is also its label in the top nav. Add an optional `"hover"` to a sign to show it as a tooltip when that sign is hovered, and an optional `"projects"` list (title, thumb, blurb, links) to show case-study cards in its drawer. Push to `main` and Netlify redeploys.
 
 ## Files
 ```
