@@ -49,6 +49,8 @@ export function mountHeroUI(scene) {
     drawer.hidden = backdrop.hidden = !sign;
     if (sign) {
       drawer.style.setProperty('--sign', sign.color);
+      // absolute URL: a relative url() in a custom property resolves against the stylesheet that uses it (css/)
+      drawer.style.setProperty('--icon', `url(${new URL(`assets/unlit/${s.activeSign}.svg`, document.baseURI)})`);
       q('#sign-drawer-title').textContent = sign.title;
       const text = q('#sign-drawer-text');
       text.textContent = sign.text;
