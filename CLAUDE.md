@@ -7,7 +7,7 @@ Static portfolio site deployed to Netlify from git. **No build step, no npm, no 
 - The page is just the hero; there are no portfolio sections below it.
 - Styling: `css/styles.css`. Colors are CSS variables in `:root`. Sign colors must match the hex values in `js/hero-scene.js` (`defs` and `signInfo`).
 - Hero scene: `js/hero-scene.js` is a three.js scene ported verbatim from the original design. Treat it as tuned. Change only what's asked and keep its `this.state` / `this.props` / `this.setState` usage (provided by `js/scene-base.js`).
-- Sign layout: each sign has a `.sign-cell` in the flex-wrap `.sign-grid` (`index.html` / `css/styles.css`). The scene measures the cells and draws each sign at its cell's center, so layout changes belong in CSS, not in the scene.
+- Sign layout: each sign has a `.sign-cell` in the flex-wrap `.sign-grid` (`index.html` / `css/styles.css`). The scene measures the cells and draws each sign at its cell's center, so layout changes belong in CSS, not in the scene. Each cell holds a `.sign-label` button (text = the sign's `title`) that opens its drawer; it's the keyboard/screen-reader way in, since the canvas is mouse/touch only.
 - Scene settings UI: markup in `index.html`, behavior in `js/hero-ui.js`.
 
 ## Conventions

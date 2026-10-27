@@ -6,7 +6,7 @@ export function mountHeroUI(scene) {
   const settings = q('#scene-settings'), info = q('#scene-info');
   const drawer = q('#sign-drawer'), backdrop = q('#sign-drawer-backdrop');
   const hoverSwitch = q('[data-action="hover"]'), saved = q('[data-saved]');
-  let infoTimer, savedTimer, shownSign;
+  let infoTimer, savedTimer, shownSign, opener;
 
   const value = {
     brightness: () => scene.state.brightness, bloom: () => scene._bloom(), fog: () => scene._fog(),
@@ -60,6 +60,8 @@ export function mountHeroUI(scene) {
     if (s.activeSign !== shownSign) {
       shownSign = s.activeSign;
       renderProjects((sign && sign.projects) || []);
+      // closed after opening from a label: hand focus back to that label
+      if (!sign && opener) { opener.focus(); opener = null; }
     }
   }
 
@@ -123,6 +125,18 @@ export function mountHeroUI(scene) {
     savedTimer = setTimeout(() => scene.setState({ savedFlash: false }), 1600);
   });
   on('[data-action="close-drawer"]', () => scene.setState({ activeSign: null }));
+  // sign labels: text and color from the sign, and a keyboard/screen-reader way into each drawer
+  qa('[data-open-sign]').forEach((b) => {
+    const info = scene.signInfo[b.dataset.openSign];
+    if (!info) return;
+    b.textContent = info.title;
+    b.style.setProperty('--sign', info.color);
+    b.addEventListener('click', () => {
+      opener = b;
+      scene.setState({ activeSign: b.dataset.openSign });
+      q('#sign-drawer .close-btn').focus();
+    });
+  });
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     if (scene.state.activeSign) scene.setState({ activeSign: null });

@@ -52,14 +52,14 @@
     </header>
     <div class="hero-stage" data-hero-stage>
       <!-- one cell per sign in a flex-wrap row; the scene draws each sign at its cell's center.
-           Reorder cells to reorder signs. -->
-      <div class="sign-grid" aria-hidden="true">
-        <div class="sign-cell" data-sign="raven"></div>
-        <div class="sign-cell" data-sign="heart"></div>
-        <div class="sign-cell" data-sign="d20"></div>
-        <div class="sign-cell" data-sign="tools"></div>
-        <div class="sign-cell" data-sign="mmark"></div>
-        <div class="sign-cell" data-sign="qblock"></div>
+           Reorder cells to reorder signs. Each label is a button that opens the sign's drawer; its text is the sign's title. -->
+      <div class="sign-grid">
+        <div class="sign-cell" data-sign="raven"><button type="button" class="sign-label" data-open-sign="raven"></button></div>
+        <div class="sign-cell" data-sign="heart"><button type="button" class="sign-label" data-open-sign="heart"></button></div>
+        <div class="sign-cell" data-sign="d20"><button type="button" class="sign-label" data-open-sign="d20"></button></div>
+        <div class="sign-cell" data-sign="tools"><button type="button" class="sign-label" data-open-sign="tools"></button></div>
+        <div class="sign-cell" data-sign="mmark"><button type="button" class="sign-label" data-open-sign="mmark"></button></div>
+        <div class="sign-cell" data-sign="qblock"><button type="button" class="sign-label" data-open-sign="qblock"></button></div>
       </div>
       <div class="hero-vignette"></div>
     </div>

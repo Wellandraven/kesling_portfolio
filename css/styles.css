@@ -48,8 +48,16 @@ button { font: inherit; }
 
 .hero-stage { position: relative; width: 100%; background: var(--bg); overflow: hidden; animation: fadeIn 0.6s ease; }
 /* sign layout: the scene reads these cells and draws each sign at its cell's center (canvas sits behind) */
-.sign-grid { display: flex; flex-wrap: wrap; justify-content: center; pointer-events: none; }
-.sign-cell { flex: 1 1 380px; max-width: 400px; min-width: 0; aspect-ratio: 4 / 3; }
+.sign-grid { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; pointer-events: none; }
+.sign-cell { position: relative; flex: 1 1 380px; max-width: 400px; min-width: 0; aspect-ratio: 4 / 3; }
+/* section label under each sign; the grid lets clicks through to the canvas, the labels take them back */
+.sign-label {
+  position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%); pointer-events: auto;
+  padding: 6px 12px; background: #000; border: 1px solid var(--line-2); border-radius: 6px; cursor: pointer;
+  color: var(--sign, var(--ink-2)); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+}
+.sign-label:hover { border-color: var(--sign); }
+.sign-label:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }
 .hero-vignette {
   position: absolute; inset: 0; pointer-events: none; z-index: 2;
   background: radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(3,2,6,0.55) 78%, rgba(2,1,4,0.85) 100%);
