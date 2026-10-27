@@ -55,6 +55,9 @@ export function mountHeroUI(scene) {
       const text = q('#sign-drawer-text');
       text.textContent = sign.text;
       text.hidden = !sign.text;
+      const badge = q('#sign-drawer-badge');
+      if (sign.badge) badge.src = sign.badge;
+      badge.hidden = !sign.badge;
       const subhead = q('#sign-drawer-subhead');
       subhead.textContent = sign.projectsHeading || '';
       subhead.hidden = !sign.projectsHeading;

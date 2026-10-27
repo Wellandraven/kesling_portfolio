@@ -8,6 +8,7 @@
     "raven": {
       "title": "Well and Raven",
       "hover": "About Well and Raven",
+      "badge": "assets/well-and-raven-badge.png",
       "text": "Well and Raven, LLC is where I am pushing the boundaries of my imagination and what can be done with AI. This involves drawing from a deep well of enterprise context and mixing it with the frontier-lead AI & Business lessons from MasterClass Executive.",
       "projectsHeading": "Current Product Releases",
       "projects": [
