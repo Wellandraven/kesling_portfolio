@@ -37,7 +37,9 @@ button { font: inherit; }
 @keyframes drawerIn { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
 /* ---------- Hero ---------- */
-.hero { width: 100%; max-width: 1400px; margin: 0 auto; }
+/* the hero is exactly the viewport: toolbar on top, the sign stage takes the rest. The stage can still
+   grow past it (page scrolls) when the grid needs its minimum cell size. */
+.hero { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; height: 100vh; height: 100svh; }
 .toolbar {
   display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; align-items: center;
   padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--line);
@@ -88,10 +90,23 @@ button { font: inherit; }
 .icon-btn:hover { border-color: var(--raven); color: var(--ink); }
 .icon-btn.is-active { background: var(--magenta); border-color: var(--magenta); color: var(--on-magenta); }
 
-.hero-stage { position: relative; width: 100%; background: var(--bg); overflow: hidden; animation: fadeIn 0.6s ease; }
-/* sign layout: the scene reads these cells and draws each sign at its cell's center (canvas sits behind) */
-.sign-grid { display: flex; flex-wrap: wrap; justify-content: center; pointer-events: none; }
-.sign-cell { flex: 1 1 380px; max-width: 400px; min-width: 0; aspect-ratio: 4 / 3; }
+/* sign layout: the scene reads these cells and draws each sign at its cell's center (canvas sits behind).
+   The grid shrinks to fit the stage so all six signs stay in view; cells stop at the min (≈80px signs),
+   and below that the stage keeps its min-height so the page scrolls. The max keeps today's desktop size. */
+.hero-stage {
+  --cols: 3; --rows: 2;
+  --cell-min-w: 146px; --cell-min-h: 110px;
+  --cell-max-w: 400px; --cell-max-h: 300px;
+  position: relative; flex: 1; display: flex; width: 100%; min-height: calc(var(--rows) * var(--cell-min-h));
+  background: var(--bg); overflow: hidden; animation: fadeIn 0.6s ease;
+}
+@media (orientation: portrait) { .hero-stage { --cols: 2; --rows: 3; } }
+.sign-grid {
+  flex: 1; display: grid; place-content: center; pointer-events: none;
+  grid-template-columns: repeat(var(--cols), minmax(var(--cell-min-w), var(--cell-max-w)));
+  grid-template-rows: repeat(var(--rows), minmax(var(--cell-min-h), var(--cell-max-h)));
+}
+.sign-cell { min-width: 0; }
 .hero-vignette {
   position: absolute; inset: 0; pointer-events: none; z-index: 2;
   background: radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(3,2,6,0.55) 78%, rgba(2,1,4,0.85) 100%);

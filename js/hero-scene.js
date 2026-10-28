@@ -149,7 +149,8 @@ export class HeroScene extends SceneBase {
         const c = el.getBoundingClientRect();
         cells[k] = { cx: c.left + c.width / 2 - r.left, cy: c.top + c.height / 2 - r.top, w: c.width, h: c.height };
       }
-      const cellH = Object.values(cells).reduce((m, c) => Math.max(m, c.h), 0);
+      // size from the largest 4:3 box that fits each cell, so tall narrow cells (portrait phones) don't crowd sideways
+      const cellH = Object.values(cells).reduce((m, c) => Math.max(m, Math.min(c.h, c.w * 0.75)), 0);
       return { w: Math.round(r.width), h: Math.round(r.height), upp: cellH ? CELL_WORLD_H / cellH : 0, cells };
     };
     // the host may not have laid out yet when _boot runs: wait a few frames for real sizes
