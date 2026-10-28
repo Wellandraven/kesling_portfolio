@@ -42,6 +42,10 @@ export function mountHeroUI(scene) {
     menuBtn.setAttribute('aria-label', s.menuOpen ? 'Close menu' : 'Open menu');
     q('[data-when="menu-closed"]').style.display = s.menuOpen ? 'none' : '';
     q('[data-when="menu-open"]').style.display = s.menuOpen ? '' : 'none';
+    qa('[data-open-sign]').forEach((b) => {
+      if (b.dataset.openSign === s.activeSign) b.setAttribute('aria-current', 'true');
+      else b.removeAttribute('aria-current');
+    });
 
     qa('[data-size]').forEach((b) => {
       const on = parseFloat(b.dataset.size) === s.size;
@@ -75,6 +79,8 @@ export function mountHeroUI(scene) {
     // sync runs on every state change, so only rebuild the project list when the open sign changes
     if (s.activeSign !== shownSign) {
       shownSign = s.activeSign;
+      // switching straight from one section to another (mobile menu over the drawer): start the new one at its top
+      drawer.scrollTop = 0;
       renderProjects((sign && sign.projects) || []);
       // closed after opening from a label: hand focus back to that label, or to the hamburger if the label sits in the closed mobile menu
       if (!sign && opener) { (opener.offsetParent ? opener : menuBtn).focus(); opener = null; }
@@ -183,8 +189,9 @@ export function mountHeroUI(scene) {
   });
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
-    if (scene.state.activeSign) scene.setState({ activeSign: null });
-    else if (scene.state.menuOpen) { scene.setState({ menuOpen: false }); menuBtn.focus(); }
+    // close the topmost layer first: the mobile menu sits above the drawer
+    if (scene.state.menuOpen) { scene.setState({ menuOpen: false }); menuBtn.focus(); }
+    else if (scene.state.activeSign) scene.setState({ activeSign: null });
     else if (scene.state.settingsOpen) scene.setState({ settingsOpen: false });
   });
 
