@@ -16,7 +16,8 @@
   --tools: #6dffb0;
   --mmark: #f5375d;
   --qblock: #ffd21e;
-  --font: Helvetica, Arial, sans-serif;
+  --font: "Inter", Helvetica, Arial, sans-serif; /* body */
+  --font-display: "Plus Jakarta Sans", Helvetica, Arial, sans-serif; /* labels + headings */
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -25,6 +26,11 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 a { color: var(--cyan); text-underline-offset: 2px; }
 a:hover { color: var(--ink); }
 button { font: inherit; }
+/* display face: uppercase labels, titles, buttons */
+.sign-label, .drawer-title, .drawer-subhead, .drawer-project h3,
+.drawer-project-links a, .panel-title, .settings .muted, .pill, .saved {
+  font-family: var(--font-display);
+}
 [hidden] { display: none !important; }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -42,7 +48,7 @@ button { font: inherit; }
 .toolbar-nav { display: flex; flex-wrap: wrap; gap: 8px; }
 .sign-label {
   min-height: 32px; padding: 6px 12px; background: #000; border: 1px solid var(--line-2); border-radius: 6px; cursor: pointer;
-  color: var(--sign, var(--ink-2)); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+  color: var(--sign, var(--ink-2)); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
 }
 .sign-label:hover { border-color: var(--sign); }
 .sign-label:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }
@@ -84,7 +90,8 @@ button { font: inherit; }
   padding: 12px 14px 12px 16px; border-radius: 10px; font-size: 13px; line-height: 1.4;
 }
 .panel-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.panel-title { color: var(--ink); }
+.panel-title { color: var(--ink); font-weight: 600; }
+.settings .muted { font-weight: 500; }
 .muted { color: var(--ink-3); }
 .close-btn {
   display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; flex: none;
@@ -95,7 +102,7 @@ button { font: inherit; }
 .seg { display: flex; border: 1px solid var(--line-2); border-radius: 15px; overflow: hidden; }
 .seg button {
   height: 28px; padding: 0 12px; border: 0; background: transparent; color: var(--ink-2);
-  font-size: 12px; letter-spacing: 0.04em; cursor: pointer;
+  font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; cursor: pointer;
 }
 .seg button + button { border-left: 1px solid var(--line-2); }
 .seg button.is-active { background: var(--magenta); color: var(--on-magenta); }
@@ -119,11 +126,11 @@ button { font: inherit; }
 .panel-actions { display: flex; gap: 8px; align-items: center; }
 .pill {
   height: 30px; padding: 0 14px; background: transparent; border: 1px solid var(--line-2); border-radius: 15px;
-  color: var(--ink-2); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+  color: var(--ink-2); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
 }
 .pill:hover { border-color: var(--raven); color: var(--ink); }
 .pill--save:hover { border-color: var(--magenta); }
-.saved { color: var(--cyan); font-size: 11px; }
+.saved { color: var(--cyan); font-size: 11px; font-weight: 500; }
 
 /* ---------- Sign drawer ---------- */
 .drawer-backdrop { position: fixed; inset: var(--nav-h, 0px) 0 0; z-index: 6; background: rgba(3,2,6,0.4); animation: fadeIn 0.2s ease; }
@@ -137,7 +144,7 @@ button { font: inherit; }
   animation: drawerIn 0.32s cubic-bezier(0.16,1,0.3,1);
 }
 .drawer-grip { width: 36px; height: 5px; border-radius: 3px; background: #3a3348; margin: 2px auto 0; flex: none; }
-.drawer-title { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sign); }
+.drawer-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sign); }
 .drawer-intro { display: flex; align-items: center; gap: 20px; }
 .drawer-badge { width: 96px; height: auto; flex: none; }
 /* narrow screens: stack the badge over the text so the paragraph keeps a readable line length */
@@ -147,7 +154,7 @@ button { font: inherit; }
 }
 /* type follows USWDS: 16px+ body, ~66-character measure, 1.5+ line-height for paragraphs, 1–1.35 for headings */
 .drawer-text { margin: 0; max-width: 55ch; /* ch is a "0"; 55ch ≈ 66 average characters */ color: var(--ink); font-size: 16px; line-height: 1.6; }
-.drawer-subhead { margin: 10px 0 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.drawer-subhead { margin: 10px 0 0; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .drawer-projects { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
 .drawer-project { display: flex; flex-direction: column; gap: 8px; padding: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
 .drawer-project-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top left; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 4px; }
@@ -157,7 +164,7 @@ button { font: inherit; }
 .drawer-project-links a {
   display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px;
   border: 1px solid var(--line-2); border-radius: 999px; color: var(--sign); text-decoration: none;
-  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
 }
 .drawer-project-links a:hover { color: var(--magenta); border-color: var(--magenta); }
 .drawer-project-links a:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }

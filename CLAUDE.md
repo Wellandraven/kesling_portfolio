@@ -13,6 +13,6 @@ Static portfolio site deployed to Netlify from git. **No build step, no npm, no 
 ## Conventions
 - three.js is pinned to 0.184.0 via the import map in `index.html`. Bump every URL together.
 - Assets are referenced as `assets/<file>`.
-- Visual language: near-black background `#050307`, panels `#0b0810`, hairlines `#1c1626` / `#2a2338`, Helvetica, small uppercase labels with letter-spacing, neon accents from the sign colors, magenta `#ff35d6` for primary/active states.
+- Visual language: near-black background `#050307`, panels `#0b0810`, hairlines `#1c1626` / `#2a2338`, Plus Jakarta Sans (labels/headings, `--font-display`) + Inter (body, `--font`) loaded from Google Fonts, small uppercase labels with letter-spacing, neon accents from the sign colors, magenta `#ff35d6` for primary/active states.
 - Keep the Pixabay sound credit in the info toast.
 - Test locally with Live Server or `npx serve .` (modules don't load from file://).
