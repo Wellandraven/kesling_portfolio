@@ -6,6 +6,7 @@ export function mountHeroUI(scene) {
   const settings = q('#scene-settings'), info = q('#scene-info');
   const drawer = q('#sign-drawer'), backdrop = q('#sign-drawer-backdrop');
   const hoverSwitch = q('[data-action="hover"]'), saved = q('[data-saved]');
+  const menuBtn = q('[data-action="menu"]'), nav = q('#site-nav'), menuBackdrop = q('.menu-backdrop');
   let infoTimer, savedTimer, shownSign, opener;
 
   const value = {
@@ -14,6 +15,8 @@ export function mountHeroUI(scene) {
   };
   const pct = (v) => Math.round(v * 100) + '%';
   const fmt = { brightness: pct, bloom: (v) => v.toFixed(2) + '×', fog: pct, flicker: pct, drift: (v) => v.toFixed(1) + '×' };
+  // sheets stop at the bottom of the top nav so the toolbar stays visible
+  const setNavH = () => document.documentElement.style.setProperty('--nav-h', `${Math.max(0, q('.toolbar').getBoundingClientRect().bottom)}px`);
   const sounds = () => [scene._kaw, scene._rollSfx, scene._zapSfx, scene._coinSfx, scene._mRainSfx].filter(Boolean);
 
   function sync() {
@@ -32,6 +35,14 @@ export function mountHeroUI(scene) {
     info.hidden = !s.infoOpen;
     q('.toolbar [data-action="info"]').setAttribute('aria-expanded', String(!!s.infoOpen));
 
+    if (s.menuOpen) setNavH();
+    nav.classList.toggle('is-open', !!s.menuOpen);
+    menuBackdrop.hidden = !s.menuOpen;
+    menuBtn.setAttribute('aria-expanded', String(!!s.menuOpen));
+    menuBtn.setAttribute('aria-label', s.menuOpen ? 'Close menu' : 'Open menu');
+    q('[data-when="menu-closed"]').style.display = s.menuOpen ? 'none' : '';
+    q('[data-when="menu-open"]').style.display = s.menuOpen ? '' : 'none';
+
     qa('[data-size]').forEach((b) => {
       const on = parseFloat(b.dataset.size) === s.size;
       b.classList.toggle('is-active', on);
@@ -48,8 +59,7 @@ export function mountHeroUI(scene) {
     const sign = s.activeSign && scene.signInfo[s.activeSign];
     drawer.hidden = backdrop.hidden = !sign;
     if (sign) {
-      // the sheet stops at the bottom of the top nav so the toolbar stays visible
-      document.documentElement.style.setProperty('--nav-h', `${Math.max(0, q('.toolbar').getBoundingClientRect().bottom)}px`);
+      setNavH();
       drawer.style.setProperty('--sign', sign.color);
       q('#sign-drawer-title').textContent = sign.title;
       const text = q('#sign-drawer-text');
@@ -66,8 +76,8 @@ export function mountHeroUI(scene) {
     if (s.activeSign !== shownSign) {
       shownSign = s.activeSign;
       renderProjects((sign && sign.projects) || []);
-      // closed after opening from a label: hand focus back to that label
-      if (!sign && opener) { opener.focus(); opener = null; }
+      // closed after opening from a label: hand focus back to that label, or to the hamburger if the label sits in the closed mobile menu
+      if (!sign && opener) { (opener.offsetParent ? opener : menuBtn).focus(); opener = null; }
     }
   }
 
@@ -127,12 +137,18 @@ export function mountHeroUI(scene) {
     if (!next) sounds().forEach((a) => a.pause());
     scene.setState({ soundOn: next });
   });
-  on('[data-action="settings"]', () => scene.setState({ settingsOpen: !scene.state.settingsOpen, infoOpen: false }));
+  on('[data-action="settings"]', () => scene.setState({ settingsOpen: !scene.state.settingsOpen, infoOpen: false, menuOpen: false }));
+  on('[data-action="menu"]', () => {
+    const next = !scene.state.menuOpen;
+    scene.setState({ menuOpen: next, settingsOpen: false, infoOpen: false });
+    if (next) q('#site-nav .sign-label').focus();
+  });
+  on('[data-action="close-menu"]', () => scene.setState({ menuOpen: false }));
   on('[data-action="info"]', () => {
     clearTimeout(infoTimer);
     const next = !scene.state.infoOpen;
     if (next) infoTimer = setTimeout(() => scene.setState({ infoOpen: false }), 8000);
-    scene.setState({ infoOpen: next, settingsOpen: false });
+    scene.setState({ infoOpen: next, settingsOpen: false, menuOpen: false });
   });
   qa('[data-size]').forEach((b) => b.addEventListener('click', () => scene.setState({ size: parseFloat(b.dataset.size) })));
   qa('input[data-key]').forEach((i) => i.addEventListener('input', () => scene.setState({ [i.dataset.key]: parseFloat(i.value) })));
@@ -161,13 +177,14 @@ export function mountHeroUI(scene) {
     b.addEventListener('blur', hoverOff);
     b.addEventListener('click', () => {
       opener = b;
-      scene.setState({ activeSign: b.dataset.openSign });
+      scene.setState({ activeSign: b.dataset.openSign, menuOpen: false });
       q('#sign-drawer .close-btn').focus();
     });
   });
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     if (scene.state.activeSign) scene.setState({ activeSign: null });
+    else if (scene.state.menuOpen) { scene.setState({ menuOpen: false }); menuBtn.focus(); }
     else if (scene.state.settingsOpen) scene.setState({ settingsOpen: false });
   });
 

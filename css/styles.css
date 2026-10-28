@@ -52,11 +52,27 @@ button { font: inherit; }
 }
 .sign-label:hover { border-color: var(--sign); }
 .sign-label:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }
-/* narrow screens: icons stay on top, labels become one sideways-scrolling row under them */
+/* hamburger + sheet grip only exist on narrow screens */
+.toolbar .menu-btn, .toolbar-nav > .drawer-grip { display: none; }
+/* narrow screens: one toolbar row; the labels move into a bottom sheet opened by the hamburger */
 @media (max-width: 720px) {
-  .toolbar { gap: 10px; }
-  .toolbar-nav { order: 1; width: 100%; flex-wrap: nowrap; overflow-x: auto; padding: 2px; scrollbar-width: none; }
-  .sign-label { flex: none; }
+  .toolbar { justify-content: space-between; gap: 10px; }
+  .toolbar .menu-btn { display: flex; }
+  .toolbar-nav { display: none; }
+  .toolbar-nav.is-open {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 7;
+    display: flex; flex-direction: column; flex-wrap: nowrap; gap: 8px;
+    max-height: calc(100vh - var(--nav-h, 0px)); overflow-y: auto;
+    padding: 10px 16px calc(20px + env(safe-area-inset-bottom));
+    background: rgba(17,13,24,0.1); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-top: 3px solid var(--magenta); box-shadow: 0 1px 6px var(--magenta), 0 2px 18px var(--magenta);
+    animation: drawerIn 0.32s cubic-bezier(0.16,1,0.3,1);
+  }
+  .toolbar-nav.is-open > .drawer-grip { display: block; margin-bottom: 6px; }
+  .toolbar-nav.is-open .sign-label {
+    display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 0 16px; font-size: 13px; text-align: left;
+  }
+  .toolbar-nav.is-open .sign-label::after { content: "\203A"; content: "\203A" / ""; font-size: 18px; }
 }
 
 .icon-btn {
@@ -135,6 +151,8 @@ button { font: inherit; }
 
 /* ---------- Sign drawer ---------- */
 .drawer-backdrop { position: fixed; inset: var(--nav-h, 0px) 0 0; z-index: 6; background: rgba(3,2,6,0.4); animation: fadeIn 0.2s ease; }
+/* the menu sheet is mobile-only; never dim the page if it was left open before widening the window */
+@media (min-width: 721px) { .menu-backdrop { display: none; } }
 .drawer {
   --sign: var(--raven);
   position: fixed; inset: var(--nav-h, 0px) 0 0; z-index: 7; width: 100%;

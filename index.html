@@ -32,8 +32,16 @@
   <!-- HERO: neon sign scene (logic in js/hero-scene.js, controls in js/hero-ui.js) -->
   <div class="hero">
     <header class="toolbar">
+      <!-- narrow screens only: opens the section labels as a bottom sheet -->
+      <button type="button" class="icon-btn menu-btn" data-action="menu" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <g data-when="menu-closed"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></g>
+          <g data-when="menu-open"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></g>
+        </svg>
+      </button>
       <!-- one button per sign: opens its drawer, and hovering/focusing plays the sign's animation. Text is the sign's title. -->
-      <nav class="toolbar-nav" aria-label="Sections">
+      <nav class="toolbar-nav" id="site-nav" aria-label="Sections">
+        <div class="drawer-grip"></div>
         <button type="button" class="sign-label" data-open-sign="raven"></button>
         <button type="button" class="sign-label" data-open-sign="heart"></button>
         <button type="button" class="sign-label" data-open-sign="d20"></button>
@@ -117,6 +125,9 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
     </button>
   </div>
+
+  <!-- Mobile menu backdrop: the sheet itself is .toolbar-nav, restyled in css/styles.css -->
+  <div class="drawer-backdrop menu-backdrop" data-action="close-menu" hidden></div>
 
   <!-- Sign drawer: opens when a sign is tapped. Text comes from content.json → "signs" -->
   <div class="drawer-backdrop" id="sign-drawer-backdrop" data-action="close-drawer" hidden></div>
