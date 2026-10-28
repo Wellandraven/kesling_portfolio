@@ -78,16 +78,16 @@
   </div>
 
   <!-- Scene settings panel -->
-  <div class="panel settings" id="scene-settings" role="dialog" aria-label="Scene settings" hidden>
+  <div class="panel settings" id="scene-settings" role="dialog" aria-labelledby="scene-settings-title" hidden>
     <div class="panel-row">
-      <span class="panel-title">Scene settings</span>
+      <h2 class="panel-title" id="scene-settings-title">Scene settings</h2>
       <button type="button" class="close-btn" data-action="settings" aria-label="Close settings">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
       </button>
     </div>
     <div class="panel-row">
-      <span class="muted">Tube size</span>
-      <div class="seg" role="group" aria-label="Tube size">
+      <span class="muted" id="tube-size-label">Tube size</span>
+      <div class="seg" role="group" aria-labelledby="tube-size-label">
         <button type="button" data-size="0.25">.25×</button>
         <button type="button" data-size="0.5">.5×</button>
         <button type="button" data-size="0.75">.75×</button>
@@ -100,8 +100,8 @@
     <label class="slider"><span class="slider-head"><span class="muted">Flicker</span><output data-out="flicker"></output></span><input type="range" min="0" max="1" step="0.05" data-key="flicker"></label>
     <label class="slider"><span class="slider-head"><span class="muted">Drift</span><output data-out="drift"></output></span><input type="range" min="0" max="3" step="0.1" data-key="drift"></label>
     <div class="panel-row">
-      <span class="muted">Hover reactions</span>
-      <button type="button" role="switch" class="switch" data-action="hover" aria-checked="true" aria-label="Hover reactions"><span></span></button>
+      <label class="muted" for="hover-switch">Hover reactions</label>
+      <button type="button" role="switch" class="switch" id="hover-switch" data-action="hover" aria-checked="true"><span aria-hidden="true"></span></button>
     </div>
     <div class="panel-actions">
       <button type="button" class="pill pill--save" data-action="save">Save</button>
@@ -112,7 +112,7 @@
 
   <!-- Sound credit toast -->
   <div class="panel toast" id="scene-info" role="status" hidden>
-    <span>Sound effects from the talented creators at <a href="https://pixabay.com/sound-effects/search/electric/" target="_blank" rel="noopener noreferrer">Pixabay</a></span>
+    <p>Sound effects from the talented creators at <a href="https://pixabay.com/sound-effects/search/electric/" target="_blank" rel="noopener noreferrer">Pixabay</a></p>
     <button type="button" class="close-btn" data-action="info" aria-label="Dismiss">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
     </button>
@@ -123,7 +123,7 @@
   <div class="drawer" id="sign-drawer" role="dialog" aria-labelledby="sign-drawer-title" hidden>
     <div class="drawer-grip"></div>
     <div class="panel-row">
-      <span class="drawer-title" id="sign-drawer-title"></span>
+      <h1 class="drawer-title" id="sign-drawer-title"></h1>
       <button type="button" class="close-btn" data-action="close-drawer" aria-label="Close">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
       </button>
