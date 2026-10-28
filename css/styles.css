@@ -49,12 +49,12 @@ button { font: inherit; }
 .sign-label {
   min-height: 32px; padding: 6px 12px; background: #000; border: 1px solid var(--line-2); border-radius: 6px; cursor: pointer;
   color: var(--sign, var(--ink-2)); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
-  transition: text-shadow 0.15s ease, border-color 0.15s ease;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
-.sign-label:hover { border-color: var(--sign); }
-/* soft neon glow in the sign's color on hover, tap/click and keyboard focus; also evens out the darker reds */
+/* soft neon glow behind the button, around its border, in the sign's color on hover, tap/click and keyboard focus */
 .sign-label:hover, .sign-label:active, .sign-label:focus-visible {
-  text-shadow: 0 0 3px var(--sign), 0 0 10px color-mix(in srgb, var(--sign) 60%, transparent);
+  border-color: var(--sign);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--sign) 70%, transparent), 0 0 16px color-mix(in srgb, var(--sign) 40%, transparent);
 }
 .sign-label:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }
 /* hamburger + sheet grip only exist on narrow screens */
